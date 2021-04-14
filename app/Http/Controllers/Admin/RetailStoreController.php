@@ -32,9 +32,9 @@ class RetailStoreController extends Controller
         if ($request->ajax()) {
             $keyword = $request->keyword === '' ? '' : $request->keyword;
 
-            $data = RetailStore::where('name', 'like', '%' . $request->category . '%')
+            $data = RetailStore::where('name', 'like', '%' . $request->keyword . '%')
             ->orderBy('created_at', 'DESC')
-            ->paginate(1);
+            ->paginate(10);
 
             return response()->json($data);
         }

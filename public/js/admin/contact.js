@@ -62,30 +62,23 @@ function load_content(page = 1)
                                 <label class="custom-control-label" for="example-checkbox1"></label>
                             </div>
                         </td>
-                        <td width="15%">
+                        <td>
                             <div class="font-size-16 font-w600">`+ response.data[k].name +`</div>
                             <div class="font-size-15">` + response.data[k].profession +`</div>
                         </td>
-                        <td width="20%">
+                        <td>
                             <div class="font-size-16 font-w600">` + response.data[k].email +`</div>
                             <div class="font-size-15">` + response.data[k].phone +`</div>
                         </td>
-                        <td>` + response.data[k].category +`</td>
-                        <td>` + response.data[k].subject +`</td>
-                        <td width="5%">
-                            <div class="btn-group text-center" role="group">
-                                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="btnGroupVerticalDrop3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="si si-wrench mr-1"></i>Aksi
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 34px, 0px);">
-                                    <a class="dropdown-item" href="{{ route('admin.post.edit', $post->id) }}">
-                                        <i class="si si-note mr-5"></i>Ubah Berita
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:void(0)" onClick="hapus({{ $post->id}})">
-                                        <i class="si si-trash mr-5"></i>Hapus Berita
-                                    </a>
-                                </div>
-                            </div>
+                        <td>
+                            <div class="font-size-16 font-w600">` + response.data[k].subject +`</div>
+                            <div class="font-size-15">` + response.data[k].category +`</div>
+                        </td>
+                        <td>
+                        ` + response.data[k].status_badge +`
+                        </td>
+                        <td>
+                        ` + response.data[k].dibuat +`
                         </td>
                     </tr>                    
                     `);

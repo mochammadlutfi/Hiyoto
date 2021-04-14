@@ -79,11 +79,13 @@ class ProductCategoryController extends Controller
     {
         // dd($request->all());
         $rules = [
-            'nama' => 'required',
+            'title' => 'required',
+            'en_title' => 'required',
         ];
 
         $pesan = [
-            'nama.required' => 'Nama Kategori Wajib Diisi!',
+            'title.required' => 'Nama Kategori Wajib Diisi!',
+            'en_title.required' => 'Category Name Must Be Filled!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $pesan);
@@ -95,7 +97,7 @@ class ProductCategoryController extends Controller
         }else{
             DB::beginTransaction();
             try{
-                $data = Kategori::find($request->kategori_id);
+                $data = ProductCategory::find($request->kategori_id);
                 if(!empty($request->thumbnail))
                 {
                     $cek = Storage::disk('umum')->exists($data->thumbnail);
@@ -111,8 +113,10 @@ class ProductCategoryController extends Controller
                     $p = Storage::disk('umum')->put($thumbName, $thumb);
                     $data->thumbnail = $thumbName;
                 }
-                $data->nama = $request->nama;
+                $data->translateOrNew('id')->title = $request->input('title');
+                $data->translateOrNew('en')->title = $request->input('en_title');
                 $data->save();
+                
             }catch(\QueryException $e){
                 DB::rollback();
                 return response()->json([

@@ -175,9 +175,9 @@ class ProductController extends Controller
             DB::beginTransaction();
             try{
                 $data = Product::find($request->product_id);
-                // $data->title = $request->name;
-                // $data->category_id = $request->kategori;
-                // $data->status = $request->status;
+                $data->title = $request->name;
+                $data->category_id = $request->kategori;
+                $data->status = $request->status;
                 
                 if(!empty($request->featured_img))
                 {

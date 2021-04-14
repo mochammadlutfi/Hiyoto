@@ -33,7 +33,7 @@ class Page extends Model
 
     public function getDibuatAttribute()
     {
-        Carbon::setLocale('id');
+        // Carbon::setLocale();
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
     }
 }

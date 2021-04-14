@@ -34,9 +34,9 @@ class BranchController extends Controller
             $keyword = $request->keyword === '' ? '' : $request->keyword;
 
             $data = BranchOffice::with('city')
-            ->where('name', 'like', '%' . $request->category . '%')
+            ->where('name', 'like', '%' . $request->keyword . '%')
             ->orderBy('created_at', 'DESC')
-            ->paginate(1);
+            ->paginate(10);
 
             return response()->json($data);
         }

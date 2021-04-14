@@ -33,38 +33,13 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Admin::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('role', function($row){
+            $keyword = $request->keyword === '' ? '' : $request->keyword;
 
-                    foreach($row->getRoleNames() as $v){
-                        $jabatan = ucwords(str_replace('-', ' ', $v));
-                    }
-                    return $jabatan;
-                })
-                ->addColumn('action', function($row){
-                    $btn = '<div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="btnGroupVerticalDrop3" 
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="si si-wrench mr-1"></i>Aksi
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1" x-placement="bottom-start"
-                             style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 34px, 0px);
-                             ">
-                                <a class="dropdown-item" href="'. route('admin.user.edit', $row->id) .'">
-                                    <i class="si si-note mr-5"></i>Ubah
-                                </a>
-                                <a class="dropdown-item btn-delete" href="javascript:void(0)" data-id="'.$row->id.'">
-                                    <i class="si si-trash mr-5"></i>Hapus
-                                </a>
-                            </div>
-                        </div>';
+            $data = Admin::where('name', 'like', '%' . $request->keyword . '%')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
 
-                    return $btn;
-                })
-                ->rawColumns(['nama', 'action', 'jenis', 'last_login'])
-                ->make(true);
+            return response()->json($data);
         }
         
         return view('admin.user.index');

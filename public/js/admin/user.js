@@ -1,68 +1,6 @@
 
 var roleSelect, oTable;
 jQuery(function() {
-    oTable = $('#list-data');
-    oTable.DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: laroute.route('admin.user'),
-        columns: [
-            {
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
-            },
-            {
-                data: 'name',
-                name: 'name'
-            },
-            {
-                data: 'email',
-                name: 'email'
-            },
-            {
-                data: 'username',
-                name: 'username'
-            },
-            {
-                data: 'role',
-                name: 'role'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false
-            },
-        ],
-        pagingType : "simple",
-        oLanguage: {
-            sSearch: '<i class="fa fa-search"></i>',
-            sSearchPlaceholder: 'Pencarian..',
-            oPaginate: {
-                sNext: '<i class="fa fa-chevron-right" ></i>',
-                sPrevious: '<i class="fa fa-chevron-left" ></i>'
-            }
-        },
-        // sDom :   "<'row'<'col-6'<'row'<'col-6'f>><'col-6'p>>",
-        sDom : "<'row'<'col-lg-7'<'row'<'col-lg-6'f<'col-lg-6'>>>>"+
-        "<'col-lg-5'<'row'<'col-9 m-auto'i><'col-3'p>>>",
-        drawCallback: function () {
-            
-            $('#list-data_wrapper .top').addClass('px-2');
-            $("#list-data").addClass('my-0');
-            // Search Filter
-            $('#list-data_filter input').addClass('ml-0');
-            $('#list-data_filter').addClass('text-left mt-2 mx-2');
-            $('#list-data_filter label').addClass("has-search mb-0 w-100");
-            // Search Pagination
-            $('#list-data_paginate').addClass("mt-2 mx-2");
-            $('#list-data_paginate ul.pagination').addClass("pagination-md mb-0");
-            $('#list-data_paginate ul.pagination li').addClass("mx-1");
-            $('#list-data_paginate ul.pagination li a').addClass("page-link");
-            $("input.form-control").removeClass('form-control-sm');
-            
-        }
-    });
 
     $(".input-password a").on('click', function(event) {
         event.preventDefault();
@@ -167,4 +105,118 @@ jQuery(function() {
             }
         });
     });
+
+    
+    // Filter Table
+    $('#search-data-list').on('input', function(){
+        clearTimeout(this.delay);
+        this.delay = setTimeout(function(){
+           $(this).trigger('search');
+        }.bind(this), 800);
+     }).on('search', function(){
+        load_content();
+        $('#current_page').val(1);
+     });
+
+    // // Navigation Table
+    $('#next-data-list').on('click', function(){
+        old = parseInt($('#current_page').val());
+        old += 1;
+        $('#current_page').val(old);
+        load_content();
+    });
+
+    $('#prev-data-list').on('click', function(){
+        old = parseInt($('#current_page').val());
+        old -= 1;
+        $('#current_page').val(old);
+        load_content();
+    });
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 });
+
+
+function load_content(){
+
+    var kategori = $('#kategori').val();
+    var keyword = $('#search-data-list').val();
+    var page = $('#current_page').val();
+
+    var navNext = $('#next-data-list');
+    var navPrev = $('#prev-data-list');
+    
+    $.ajax({
+        url: laroute.route('admin.posts'),
+        type: "GET",
+        dataType: "JSON",
+        data: {
+            keyword: keyword,
+            kategori_id : kategori,
+            page: page,
+        },
+        beforeSend: function(){
+            $('#data-list tbody tr#loading').removeClass('d-none');
+            navNext.prop('disabled', true);
+            navPrev.prop('disabled', true);
+        },
+        success: function(response) {
+            $('#data-list tbody tr').not('#data-list tbody tr#loading').remove();
+            if(response.data.length !== 0){
+                $.each(response.data, function(k, v) {
+                    $('#data-list tbody').append(`
+                        <tr>
+                            <td>
+                                <div class="custom-control custom-checkbox mb-5">
+                                    <input class="custom-control-input" type="checkbox" name="example-checkbox1" id="example-checkbox1" value="option1" >
+                                    <label class="custom-control-label" for="example-checkbox1"></label>
+                                </div>
+                            </td>
+                            <td>`+ response.data[k].name +`</td>
+                            <td>`+ response.data[k].email +`</td>
+                            <td>`+ response.data[k].username +`</td>
+                            <td>`+ response.data[k].role +`</td>
+                            <td>
+                                <a class="btn btn-secondary btn-sm js-tooltip" data-toggle="tooltip" data-placement="top" title="Ubah" href="`+ laroute.route('admin.user.edit', { id : response.data[k].id }) +`">
+                                    <i class="si si-note"></i>
+                                </a>
+                                <a class="btn btn-secondary btn-sm js-tooltip" data-toggle="tooltip" data-placement="top" title="Hapus" href="javascript:void(0);" onclick="hapus(`+ response.data[k].id +`)">
+                                    <i class="si si-trash"></i>
+                                </a>
+                            </td>
+                        </tr>              
+                    `);
+                });
+            }else{
+
+                $('#data-list tbody').append(`
+                <tr>
+                    <td colspan="6">
+                        <div class="text-center">
+                            <img class="img-fluid" src="`+ laroute.url('public/img/icon/not_found.png', ['']) +`">
+                            <div>
+                                <h3 class="font-size-24 font-w600 mt-3">Data Tidak Ditemukan</h3>
+                            </div>
+                        </div>
+                    </td>
+                </tr>          
+                `);
+            }
+
+            // Table Navigation
+            response.next_page_url !== null ? navNext.prop('disabled', false) : navNext.prop('disabled', true);
+            response.prev_page_url !== null ? navPrev.prop('disabled', false) : navPrev.prop('disabled', true);
+            if(response.total === 0){
+                var navigasi = 'Menampilkan Data 0 - 0 Dari 0';
+            }else{
+                var navigasi = 'Menampilkan Data '+ response.from +' - '+ response.to +' Dari '+ response.total;
+            }
+            $('#content-nav span').html(navigasi);
+            $('#data-list tbody tr#loading').addClass('d-none');
+            // End Table Navigation
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error deleting data');
+        }
+    });
+}

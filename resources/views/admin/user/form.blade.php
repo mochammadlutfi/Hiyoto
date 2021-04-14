@@ -63,7 +63,7 @@
 @stop
 
 @push('scripts')
-{{-- <link rel="stylesheet" href="{{ asset('js/plugins/select2/css/select2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('js/plugins/select2/css/select2-bootstrap4.min.css') }}"> --}}
+<link rel="stylesheet" href="{{ asset('js/plugins/select2/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('js/plugins/select2/css/select2-bootstrap4.min.css') }}">
 <script src="{{ asset('js/admin/user.js') }}"></script>
 @endpush

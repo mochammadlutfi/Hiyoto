@@ -23,6 +23,10 @@ class Admin extends Authenticatable implements MustVerifyEmail
         'nama', 'nip', 'username', 'email', 'password',
     ];
 
+    protected $appends = [
+        'role'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -51,4 +55,17 @@ class Admin extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new AdminEmailVerificationNotification);
     }
+
+
+    public function getRoleAttribute($value)
+    {
+        foreach($this->getRoleNames() as $v){
+            $jabatan = ucwords(str_replace('-', ' ', $v));
+        }
+        return $jabatan;
+    }
+
+
+
+    
 }

@@ -23,11 +23,11 @@
                                 <label class="custom-control-label" for="example-checkbox1"></label>
                             </div>
                         </th>
-                        <th>NAMA</th>
-                        <th>KONTAK</th>
-                        <th width="10%">KATEGORI</th>
-                        <th width="20%">SUBJEK</th>
-                        <th width="10%">AKSI</th>
+                        <th width="15%">NAMA</th>
+                        <th width="20%">KONTAK</th>
+                        <th width="20%">PESAN</th>
+                        <th width="10%">TANGGAL</th>
+                        <th width="15%">STATUS</th>
                     </tr>
                 </thead>
                 <tbody>
