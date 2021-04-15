@@ -82,18 +82,25 @@ class PostCategoryController extends Controller
 
             DB::beginTransaction();
             try{
-                $data = [
-                    'id' => [
-                        'title'       => $request->input('title'),
-                        'description' => $request->input('description')
-                    ],
-                    'en' => [
-                        'title'       => $request->input('en_title'),
-                        'description' => $request->input('en_description')
-                    ],
-                 ];
+
+                $data = new PostCategory();
+                $data->translateOrNew('id')->title = $request->input('title');
+                $data->translateOrNew('en')->title = $request->input('en_title');
+                $data->translateOrNew('id')->title = $request->input('description');
+                $data->translateOrNew('en')->title = $request->input('en_description');
+                $data->save();
+                // $data = [
+                //     'id' => [
+                //         'title'       => $request->input('title'),
+                //         'description' => $request->input('description')
+                //     ],
+                //     'en' => [
+                //         'title'       => $request->input('en_title'),
+                //         'description' => $request->input('en_description')
+                //     ],
+                //  ];
              
-                 PostCategory::create($data);
+                //  PostCategory::create($data);
 
             }catch(\QueryException $e){
                 DB::rollback();

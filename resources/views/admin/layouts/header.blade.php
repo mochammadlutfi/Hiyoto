@@ -19,7 +19,10 @@
             <!-- Notifications -->
             {{-- @include('admin.layouts.notif') --}}
             <!-- END Notifications -->
-
+            <a href="{{ url('/') }}" class="btn btn-outline-primary">
+                <i class="si si-screen-desktop"></i>
+                Lihat Website
+            </a>
             <!-- User Dropdown -->
             @if(Auth::guard('admin')->check())
                 <div class="btn-group" role="group">

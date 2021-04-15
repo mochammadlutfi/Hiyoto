@@ -13,16 +13,19 @@
         </div>
     </div>
 </div>
+<div class="content py-0">
+    <nav class="breadcrumb mb-0">
+        <a class="breadcrumb-item" href="{{ url('/') }}">Home</a>
+        <span class="breadcrumb-item active">Berita</span>
+    </nav>
+</div>
 <!-- END Hero -->
-
 <!-- Page Content -->
 <div class="bg-white">
-    
     <div class="content content-full">
         <div class="row justify-content-center">
-                    
             @foreach($posts as $post)
-            <div class="col-6 col-xl-4 px-1">
+            <div class="col-6 col-xl-4 px-2">
                 <div class="block block-shadow block-bordered mb-2">
                     <div class="block-content block-content-full p-0">
                         <a class="badge badge-primary font-w700 badge-kategori p-2 text-white">

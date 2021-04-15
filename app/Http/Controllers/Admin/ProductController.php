@@ -236,13 +236,13 @@ class ProductController extends Controller
     }
     public function hapus($id)
     {
-        $post = Post::find($id);
-        $cek = Storage::disk('public')->exists($post->featured_img);
+        $data = Product::find($id);
+        $cek = Storage::disk('public')->exists($data->image);
         if($cek)
         {
-            Storage::disk('public')->delete($post->featured_img);
+            Storage::disk('public')->delete($data->image);
         }
-        $hapus_db = Post::destroy($post->id);
+        $hapus_db = Product::destroy($data->id);
         if($hapus_db)
         {
             return response()->json([

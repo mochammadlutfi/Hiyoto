@@ -6,63 +6,6 @@
         text-align: center;
     }
 
-    /* Solid Social Share Buttons */
-
-    .btn-social,
-    .btn-social:visited,
-    .btn-social:focus,
-    .btn-social:hover,
-    .btn-social:active {
-        color: #ffffff;
-        text-decoration: none;
-        transition: opacity .15s ease-in-out;
-    }
-
-    .btn-social:hover,
-    .btn-social:active {
-        opacity: .75;
-    }
-
-    .btn-fb {
-        background-color: #3b5998;
-    }
-
-    .btn-tw {
-        background-color: #1da1f2;
-    }
-
-    .btn-in {
-        background-color: #0077b5;
-    }
-
-    .btn-wa {
-        background-color: #25d366;
-    }
-
-    .btn-line {
-        background-color: #00c300;
-    }
-
-    .btn-hn {
-        background-color: #ff4000;
-    }
-
-
-    /* Fluid Styles */
-
-    .fluid {
-        display: flex;
-    }
-
-    .fluid a {
-        flex-grow: 1;
-        margin-right: 0.25rem;
-    }
-
-    .fluid a:last-child {
-        margin-right: 0rem;
-    }
-
     .list-category-1{
         padding: 0;
         margin: 0;

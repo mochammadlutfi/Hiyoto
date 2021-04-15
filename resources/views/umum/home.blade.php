@@ -103,8 +103,6 @@
                     <div class="col-4 col-md-3 py-30 js-appear-enabled animated bounceIn" data-toggle="appear" data-class="animated bounceIn" data-timeout="150">
                         <img src="{{ asset('img/brands/Hubber.jpg') }}" class="img-fluid">
                     </div>
-                </div>
-                <div class="row justify-content-center">
                     <div class="col-4 col-md-3 py-30 js-appear-enabled animated bounceIn" data-toggle="appear" data-class="animated bounceIn">
                         <img src="{{ asset('img/brands/Maribond.jpg') }}" class="img-fluid">
                     </div>

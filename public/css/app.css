@@ -27130,3 +27130,68 @@ div.tagsinput span.tag a:hover {
   height: 5px;
   background: 0 0;
 }
+
+/* Solid Social Share Buttons */
+/* Fluid Styles */
+.btn-social {
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.15s ease-in-out;
+}
+.btn-social:visited {
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.15s ease-in-out;
+}
+.btn-social:focus {
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.15s ease-in-out;
+}
+.btn-social:hover {
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.15s ease-in-out;
+  opacity: 0.75;
+}
+.btn-social:active {
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.15s ease-in-out;
+  opacity: 0.75;
+}
+
+.btn-fb {
+  background-color: #3b5998;
+}
+
+.btn-tw {
+  background-color: #1da1f2;
+}
+
+.btn-in {
+  background-color: #0077b5;
+}
+
+.btn-wa {
+  background-color: #25d366;
+}
+
+.btn-line {
+  background-color: #00c300;
+}
+
+.btn-hn {
+  background-color: #ff4000;
+}
+
+.fluid {
+  display: flex;
+}
+.fluid a {
+  flex-grow: 1;
+  margin-right: 0.25rem;
+}
+.fluid a:last-child {
+  margin-right: 0rem;
+}

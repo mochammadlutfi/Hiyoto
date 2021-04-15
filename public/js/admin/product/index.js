@@ -87,7 +87,7 @@ function load_content()
                                 <a class="btn btn-secondary btn-sm js-tooltip" data-toggle="tooltip" data-placement="top" title="Ubah" href="`+ laroute.route('admin.product.edit', { id : response.data[k].id }) +`">
                                     <i class="si si-note"></i>
                                 </a>
-                                <a class="btn btn-secondary btn-sm js-tooltip" data-toggle="tooltip" data-placement="top" title="Hapus" href="`+ laroute.route('admin.product.edit', { id : response.data[k].id }) +`">
+                                <a class="btn btn-secondary btn-sm js-tooltip" data-toggle="tooltip" data-placement="top" title="Hapus" href="javascript:void(0);" onclick="hapus(`+ response.data[k].id +`)">
                                     <i class="si si-trash"></i>
                                 </a>
                             </td>
@@ -147,7 +147,7 @@ function hapus(id) {
     .then((result) => {
         if (result.value) {
         $.ajax({
-            url: laroute.route('admin.post.hapus', { id: id }),
+            url: laroute.route('admin.product.hapus', { id: id }),
             type: "GET",
             dataType: "JSON",
             beforeSend: function(){
@@ -167,7 +167,7 @@ function hapus(id) {
                     showConfirmButton: false,
                     icon: 'success'
                 });
-                $('#list-post').DataTable().ajax.reload();
+                load_content();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 Swal.close();

@@ -144,13 +144,13 @@ class ProductCategoryController extends Controller
 
     public function hapus($id)
     {
-        $data = Kategori::find($id);
-        $cek = Storage::disk('public')->exists($data->icon);
+        $data = ProductCategory::find($id);
+        $cek = Storage::disk('umum')->exists($data->thumbnail);
         if($cek)
         {
-            Storage::disk('public')->delete($data->icon);
+            Storage::disk('umum')->delete($data->thumbnail);
         }
-        $hapus_db = Kategori::destroy($data->id);
+        $hapus_db = ProductCategory::destroy($data->id);
         if($hapus_db)
         {
             return response()->json([
