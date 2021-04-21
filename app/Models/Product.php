@@ -43,6 +43,7 @@ class Product extends Model implements TranslatableContract
 
     public function getImageUrlAttribute()
     {
+        
         if (file_exists( public_path() . '/' . $this->attributes['image']) && $this->attributes['image'] !== null) {
             return asset($this->attributes['image']);
         } else {

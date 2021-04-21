@@ -15,16 +15,12 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
-Route::get('/coba', function () {
-    // dd(Session()->get('applocale'));
-    // foreach (config('translatable.locales') as $lang => $language)
-    // {
-    //     if ($lang != app()->getLocale()){
-    //         echo $lang .'--'. $language;
-    //     }
-    // }
-    // return redirect()->back();
+Route::get('/dev', function () {
+    Artisan::call("laroute:generate");
+    Artisan::call("optimize:clear");
+    Artisan::call("key:generate");
 });
+
 Route::post('/daerahSelect', 'Umum\GeneralController@daerahSelect')->name('daerahSelect');
 Route::post('/contact/send','Umum\ContactController@send')->name('contact.send');
 

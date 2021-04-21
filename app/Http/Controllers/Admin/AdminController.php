@@ -53,7 +53,6 @@ class AdminController extends Controller
         return view('admin.pengelola');
     }
 
-
     public function simpan(Request $request)
     {
         $rules = [
@@ -182,62 +181,6 @@ class AdminController extends Controller
             return response()->json([
                 'fail' => false,
             ]);
-        }
-    }
-
-    public function pengaturan(Request $request)
-    {
-        if($request->isMethod('get')){
-            return view('pengguna.pengaturan');
-        }else{
-            $rules = [
-                'nip' => [
-                    'required',
-                    Rule::unique('users')->ignore(Auth::user()->id),
-                ],
-                'nama' => 'required',
-                'username' => [
-                    'required',
-                    Rule::unique('users')->ignore(Auth::user()->id),
-                ],
-                'email' => [
-                    'required',
-                    Rule::unique('users')->ignore(Auth::user()->id),
-                ],
-            ];
-
-            $pesan = [
-                'nip.required' => 'NIP Wajib Diisi!',
-                'nip.unique' => 'NIP Sudah Digunakan. Gunakan NIP Lain!',
-                'nama.required' => 'Nama Lengkap Wajib Diisi!',
-                'username.required' => 'Username Wajib Diisi!',
-                'username.unique' => 'Username Sudah Digunakan. Gunakan Username Lain!',
-                'email.required' => 'Email Wajib Diisi!',
-                'email.unique' => 'Email Sudah Digunakan. Gunakan Email Lain!',
-            ];
-
-            $validator = Validator::make($request->all(), $rules, $pesan);
-            if ($validator->fails()){
-                return response()->json([
-                    'fail' => true,
-                    'errors' => $validator->errors()
-                ]);
-            }else{
-
-                $data = User::find(Auth::user()->id);
-                $data->nip = $request->nip;
-                $data->nama = $request->nama;
-                $data->username = $request->username;
-                $data->email = $request->email;
-                if($data->save())
-                {
-                    return response()->json([
-                        'fail' => false,
-                    ]);
-                }
-            }
-
-
         }
     }
 
