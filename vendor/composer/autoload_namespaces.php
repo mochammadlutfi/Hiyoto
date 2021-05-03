@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Phpro\\SoapClient\\' => array($vendorDir . '/phpro/soap-client/src'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'Mcamara\\LaravelLocalization' => array($vendorDir . '/mcamara/laravel-localization/src'),
 );

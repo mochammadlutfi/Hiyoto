@@ -76,17 +76,15 @@ namespace('Umum')->group(function(){
     Route::get(LaravelLocalization::transRoute('front_menu.branch.slug'), 'BranchController@index')->name('branch');
     Route::get('branch/data', 'BranchController@data')->name('branch.data');
 
-    
     Route::get(LaravelLocalization::transRoute('front_menu.retail.slug'), 'StoreController@index')->name('store');
-
 
     Route::get(LaravelLocalization::transRoute('front_menu.career.slug'), 'CareerController@index')->name('career');
     Route::get('retail/data', 'StoreController@data')->name('store.data');
     
     Route::group(['prefix' => 'news'], function(){
-        // Route::get('/', 'PostController@index')->name('posts');
         // Route::get('/{slug}', 'PostController@detail')->name('post.detail');
     });
+    Route::get('/job', 'CareerController@getData');
 
     Route::get(LaravelLocalization::transRoute('front_menu.project.slug'), 'ProjectController@index')->name('project');
 
