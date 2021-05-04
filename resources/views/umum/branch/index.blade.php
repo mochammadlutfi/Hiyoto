@@ -53,7 +53,7 @@
 @stop
 
 @push('scripts')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZcJ2vFTmpW6HQvhsL3A6pet5Tauvz3io" async></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2NxIbwMNyqRfNfo_VMlxLWs_-s1e8sdE" async></script>
 <script src="{{ asset('js/plugins/select2/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('js/plugins/select2/js/i18n/id.js') }}"></script>
 <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
