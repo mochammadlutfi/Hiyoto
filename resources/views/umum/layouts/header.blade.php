@@ -98,6 +98,14 @@
         </div>
         <!-- END Middle Section -->
 
+        <div class="content-header-section my-auto">
+            <!-- Toggle Sidebar -->
+            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+            <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                <i class="fa fa-bars"></i>
+            </button>
+            <!-- END Toggle Sidebar -->
+        </div>
     </div>
     <!-- END Header Content -->
 
